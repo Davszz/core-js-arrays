@@ -37,8 +37,29 @@ function getIntervalArray(/* start, end */) {
  *    sumArrays([10, 20, 30], [5, 10, 15]) => [15, 30, 45]
  *    sumArrays([-1, 0, 1], [1, 2, 3, 4]) => [0, 2, 4, 4]
  */
-function sumArrays(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function sumArrays(arr1, arr2) {
+  // let reuslt = []
+  // if (arr1.length > arr2.length) {
+  //   for (let i = 0; i < arr1.length; i++) {
+  //     if (!arr2[i]) {
+  //       reuslt.push(arr1[i])
+  //     } else {
+  //       reuslt.push(arr1[i] + arr2[i]);
+  //     }
+  //   }
+  // }
+  //   return reuslt
+  if (arr1.length > arr2.length) {
+    const result = arr1.map(
+      (item, index) => item + (arr2[index] ? arr2[index] : 0)
+    );
+    return result;
+  }
+
+  const result = arr2.map(
+    (item, index) => item + (arr1[index] ? arr1[index] : 0)
+  );
+  return result;
 }
 
 /**
@@ -121,11 +142,9 @@ function getStringsLength(arr) {
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
 function getAverage(arr) {
-  let summ = 0;
-  arr.forEach((x) => {
-    summ += x;
-  });
-  return (summ / arr.length).toFixed(2);
+  if (arr.length === 0) return 0;
+  const result = arr.reduce((a, b) => a + b);
+  return +(result / arr.length).toFixed(2);
 }
 
 /**
@@ -248,8 +267,9 @@ function toStringList(arr) {
  *   distinct([ 1, 1, 2, 2, 3, 3, 4, 4]) => [ 1, 2, 3, 4]
  *   distinct([]) => []
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const newArr = new Set(arr);
+  return Array.from(newArr);
 }
 
 /**
@@ -265,8 +285,11 @@ function distinct(/* arr */) {
  *    createNDimensionalArray(4, 2) => [[[[0, 0], [0, 0]], [[0, 0], [0, 0]]], [[[0, 0], [0, 0]], [[0, 0], [0, 0]]]]
  *    createNDimensionalArray(1, 1) => [0]
  */
-function createNDimensionalArray(/* n, size */) {
-  throw new Error('Not implemented');
+function createNDimensionalArray(n, size) {
+  if (n === 1) {
+    return Array(size).fill(0);
+  }
+  return Array(size).fill(createNDimensionalArray(n - 1, size));
 }
 
 /**
