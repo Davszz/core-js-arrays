@@ -369,8 +369,9 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  const arr = Array.from({ length: len }, (el, index) => index * 2 + 1);
+  return arr;
 }
 
 /**
@@ -385,8 +386,8 @@ function generateOdds(/* len */) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  return indices.reduce((acc, index) => acc[index], arr);
 }
 
 /**
@@ -401,8 +402,8 @@ function getElementByIndices(/* arr, indices */) {
  *  getFalsyValuesCount([ -1, 'false', null, 0 ]) => 2
  *  getFalsyValuesCount([ null, undefined, NaN, false, 0, '' ]) => 6
  */
-function getFalsyValuesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getFalsyValuesCount(arr) {
+  return arr.filter((el) => !el).length;
 }
 
 /**
@@ -438,8 +439,11 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers.reduce((acc, item, index) => {
+    if (item % 2 !== 0) acc.push(index);
+    return acc;
+  }, []);
 }
 
 /**
@@ -452,8 +456,10 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map(
+    (item) => `#${item.toString(16).padStart(6, 0).toUpperCase()}`
+  );
 }
 
 /**
@@ -519,8 +525,8 @@ function findLongestIncreasingSubsequence(/* nums */) {
  *  propagateItemsByPositionIndex([ 'a', 'b', 'c', null ]) => [ 'a', 'b', 'b', 'c', 'c', 'c',  null, null, null, null ]
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.map((item, index) => new Array(index + 1).fill(item)).flat(10);
 }
 
 /**
@@ -554,7 +560,7 @@ function shiftArray(arr, n) {
  *   sortDigitNamesByNumericOrder([ 'one','one','one','zero' ]) => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-  const line = [
+  const arrLine = [
     'zero',
     'one',
     'two',
@@ -566,7 +572,7 @@ function sortDigitNamesByNumericOrder(arr) {
     'eight',
     'nine',
   ];
-  return arr.sort((a, b) => line.indexOf(a) - line.indexOf(b));
+  return arr.sort((a, b) => arrLine.indexOf(a) - arrLine.indexOf(b));
 }
 
 /**
@@ -588,8 +594,25 @@ function sortDigitNamesByNumericOrder(arr) {
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  let sum;
+  if (arr.length % 2 === 0) {
+    const newArr = arr.slice(arr.length / 2);
+    const arrr = arr.slice(0, arr.length / 2);
+
+    const result = [...newArr, ...arrr];
+    sum = result;
+  }
+
+  if (arr.length % 2 !== 0) {
+    const newArr = arr.slice(arr.length / 2 + 1);
+    const aaa = arr.slice(arr.length / 2, arr.length / 2 + 1);
+
+    const arrr = arr.slice(0, arr.length / 2);
+    const result = [...newArr, ...aaa, ...arrr];
+    sum = result;
+  }
+  return sum;
 }
 
 module.exports = {
